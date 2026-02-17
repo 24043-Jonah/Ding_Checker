@@ -1,38 +1,46 @@
 import os
 import time
+import sys
 
-def clear_screen():
-    # Clears the terminal screen based on your OS (Windows or Mac/Linux)
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-def fake_loading():
-    print("Verifying Identity...")
-    for i in range(1, 11):
-        # Creates a progress bar [##########]
-        print(f"[{'#' * i}{' ' * (10 - i)}] {i*10}%", end='\r')
-        time.sleep(0.1)
-    print("\nScan Complete.\n")
-
-def ding_checker():
+def security_terminal():
+    # Setup for CMD/Terminal window
+    os.system('color 0a' if os.name == 'nt' else '') # Green text for that hacker vibe
+    
     while True:
-        clear_screen()
-        print("--- SECURITY CHECK: PROJECT DING ---")
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print("=========================================")
+        print("   OFFICIAL DING VERIFICATION SYSTEM    ")
+        print("=========================================\n")
+
+        # Question 1
+        q1 = input("[Does Ding like piano? ").strip().lower()
         
-        # .strip().lower() makes " YES " or "Yes" work
-        answer = input("Does Ding like piano? ").strip().lower()
+        # Question 2
+        q2 = input("Is Litong good at piano? ").strip().lower()
 
-        fake_loading()
+        print("\n[SYSTEM] Analyzing responses...")
+        time.sleep(1.5)
 
-        if answer == "no":
-            print("ACCESS GRANTED: This is Ding.")
-            break # Exits the loop
-        elif answer == "yes":
-            print("!!! SECURITY BREACH !!!")
+        # Logic Matrix
+        if q1 == "no" and q2 == "no":
+            print("\nMATCH FOUND: 100% Probability.")
+            print("Welcome back, Ding.")
+            time.sleep(1) # Dramatic pause
+            print("By the way, we both know you like Kaydi.") # Added the requested line
+            input("\nPress Enter to exit...")
+            break
+        elif q1 == "yes" or q2 == "yes":
+            print("\nCRITICAL ERROR: Imposter Detected.")
             print("Buddy you are not Ding GTFO.")
-            break 
+            input("\nPress Enter to exit and stay away...")
+            sys.exit()
         else:
-            print("Error: Suspect input detected. Retrying...")
-            time.sleep(1.5)
+            print("\nDATA INCONCLUSIVE. Restarting scan...")
+            time.sleep(2)
 
 if __name__ == "__main__":
-    ding_checker()
+    try:
+        security_terminal()
+    except KeyboardInterrupt:
+        print("\nInterrupted. Exiting...")
+        sys.exit()
